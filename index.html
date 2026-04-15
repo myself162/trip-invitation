@@ -120,9 +120,249 @@ body { background: var(--bg); color: var(--txt); font-family: 'Jost', sans-serif
   .cl-grid { grid-template-columns: 1fr; }
   .hs-img { height: 180px; }
 }
+
+/* Invitation opening experience */
+body {
+  overflow-x: hidden;
+}
+.dash {
+  opacity: 0;
+  transform: translateY(28px) scale(0.985);
+  transition: opacity 1s ease, transform 1s cubic-bezier(.22,.8,.2,1);
+}
+body.loaded .dash {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+.invitation-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background:
+    radial-gradient(circle at 50% 18%, rgba(201,169,110,0.16), transparent 32%),
+    radial-gradient(circle at 50% 82%, rgba(201,169,110,0.08), transparent 40%),
+    linear-gradient(180deg, #090a0d 0%, #0c0d10 55%, #111319 100%);
+  transition: opacity 0.9s ease, visibility 0.9s ease;
+}
+.invitation-overlay.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+.invitation-glow {
+  position: absolute;
+  width: min(70vw, 620px);
+  height: min(70vw, 620px);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(201,169,110,0.10), rgba(201,169,110,0.02) 45%, transparent 70%);
+  filter: blur(10px);
+  animation: glowPulse 3.8s ease-in-out infinite;
+}
+.invitation-card {
+  position: relative;
+  width: min(92vw, 560px);
+  min-height: 720px;
+  border-radius: 28px;
+  overflow: hidden;
+  background:
+    linear-gradient(180deg, rgba(20,21,25,0.97), rgba(12,13,16,0.985));
+  border: 1px solid rgba(201,169,110,0.20);
+  box-shadow:
+    0 24px 80px rgba(0,0,0,0.55),
+    0 0 0 1px rgba(232,213,168,0.03) inset;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform-origin: center center;
+}
+.invitation-card::before,
+.invitation-card::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 160px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(201,169,110,0.55), transparent);
+}
+.invitation-card::before { top: 36px; }
+.invitation-card::after { bottom: 36px; }
+.invite-frame {
+  position: absolute;
+  inset: 18px;
+  border: 1px solid rgba(201,169,110,0.16);
+  border-radius: 22px;
+  pointer-events: none;
+}
+.invite-seal {
+  position: absolute;
+  top: 84px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  border: 1px solid rgba(201,169,110,0.25);
+  background:
+    radial-gradient(circle at 35% 35%, rgba(232,213,168,0.18), rgba(201,169,110,0.08) 45%, rgba(201,169,110,0.02) 70%, transparent 72%);
+  box-shadow: 0 0 30px rgba(201,169,110,0.12);
+}
+.invite-inner {
+  position: relative;
+  text-align: center;
+  padding: 132px 36px 64px;
+  max-width: 440px;
+}
+.invite-overline {
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.38em;
+  text-transform: uppercase;
+  color: var(--gold3);
+  margin-bottom: 24px;
+}
+.invitation-card h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 48px;
+  font-weight: 300;
+  color: var(--gold2);
+  line-height: 1.12;
+  letter-spacing: 0.03em;
+  margin-bottom: 14px;
+}
+.invitation-card h1 em {
+  font-style: italic;
+  font-weight: 300;
+}
+.invite-subtitle {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--txt2);
+  margin-bottom: 18px;
+}
+.invite-dates {
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--txt3);
+  margin-bottom: 42px;
+}
+.open-btn {
+  appearance: none;
+  border: 1px solid rgba(201,169,110,0.30);
+  background: linear-gradient(180deg, rgba(201,169,110,0.10), rgba(201,169,110,0.04));
+  color: var(--gold2);
+  font-family: 'Jost', sans-serif;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 14px 24px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 10px 28px rgba(0,0,0,0.20);
+}
+.open-btn:hover {
+  transform: translateY(-1px);
+  border-color: rgba(201,169,110,0.45);
+  background: linear-gradient(180deg, rgba(201,169,110,0.14), rgba(201,169,110,0.06));
+  box-shadow: 0 14px 34px rgba(0,0,0,0.25), 0 0 22px rgba(201,169,110,0.08);
+}
+.invite-hint {
+  margin-top: 16px;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--txt3);
+}
+.invitation-card.opening {
+  animation: invitationOpen 1.15s cubic-bezier(.22,.8,.2,1) forwards;
+}
+.invitation-overlay.hidden .invitation-glow {
+  animation: none;
+}
+@keyframes invitationOpen {
+  0% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    filter: blur(0);
+  }
+  40% {
+    opacity: 1;
+    transform: scale(1.018) translateY(-2px);
+    filter: blur(0);
+  }
+  70% {
+    opacity: 0.78;
+    transform: scale(1.05) translateY(-10px);
+    filter: blur(1px);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.13) translateY(-20px);
+    filter: blur(8px);
+  }
+}
+@keyframes glowPulse {
+  0%, 100% { transform: scale(0.98); opacity: 0.75; }
+  50% { transform: scale(1.04); opacity: 1; }
+}
+@media (max-width: 500px) {
+  .invitation-overlay {
+    padding: 18px;
+  }
+  .invitation-card {
+    min-height: 78vh;
+    border-radius: 22px;
+  }
+  .invite-frame {
+    inset: 14px;
+    border-radius: 18px;
+  }
+  .invite-seal {
+    top: 72px;
+    width: 54px;
+    height: 54px;
+  }
+  .invite-inner {
+    padding: 118px 24px 46px;
+  }
+  .invitation-card h1 {
+    font-size: 38px;
+  }
+  .invite-subtitle {
+    font-size: 17px;
+  }
+}
+
 </style>
 </head>
 <body>
+
+<div id="invitationOverlay" class="invitation-overlay" aria-label="Invitation cover">
+  <div class="invitation-glow"></div>
+  <div class="invitation-card" id="invitationCard">
+    <div class="invite-frame"></div>
+    <div class="invite-seal"></div>
+    <div class="invite-inner">
+      <div class="invite-overline">You are cordially invited to</div>
+      <h1>A Journey Through<br><em>Central Vietnam</em></h1>
+      <div class="invite-subtitle">Ho Chi Minh City — Huế — Đà Nẵng</div>
+      <div class="invite-dates">April 27 — May 2, 2026</div>
+      <button id="openInvitationBtn" class="open-btn" type="button">Open Invitation</button>
+      <div class="invite-hint">tap to open</div>
+    </div>
+  </div>
+</div>
+
 <div class="dash">
 
   <div class="hero">
@@ -372,6 +612,21 @@ function toggle(el) {
   s.classList.toggle('open');
   g.textContent = o ? '▾ expand' : '▴ collapse';
 }
+
+const overlay = document.getElementById('invitationOverlay');
+const card = document.getElementById('invitationCard');
+const btn = document.getElementById('openInvitationBtn');
+
+if (btn && overlay && card) {
+  btn.addEventListener('click', function () {
+    card.classList.add('opening');
+    setTimeout(function () {
+      overlay.classList.add('hidden');
+      document.body.classList.add('loaded');
+    }, 900);
+  });
+}
+
 </script>
 </body>
 </html>

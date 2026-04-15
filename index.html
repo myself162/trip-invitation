@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Central Vietnam Trip — Apr 27 – May 2, 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --bg: #0c0d10;
+  --bg2: #141519;
+  --bg3: #1a1b21;
+  --gold: #c9a96e;
+  --gold2: #e8d5a8;
+  --gold3: #a8874e;
+  --txt: #dbd8d0;
+  --txt2: #908e88;
+  --txt3: #5a5955;
+  --hue-c: #d4897a;
+  --danang-c: #6bb8c9;
+  --hcm-c: #c9a96e;
+  --border: rgba(201,169,110,0.1);
+  --border2: rgba(201,169,110,0.06);
+  --r: 10px;
+}
+body { background: var(--bg); color: var(--txt); font-family: 'Jost', sans-serif; font-weight: 300; padding: 2rem 0; -webkit-font-smoothing: antialiased; }
+.dash { max-width: 720px; margin: 0 auto; padding: 0 1.25rem; }
+
+/* Hero */
+.hero { text-align: center; padding: 3rem 1rem 2.5rem; margin-bottom: 2rem; position: relative; }
+.hero::before, .hero::after { content: ''; position: absolute; left: 50%; transform: translateX(-50%); width: 140px; height: 1px; background: linear-gradient(90deg, transparent, var(--gold3), transparent); }
+.hero::before { top: 0; }
+.hero::after { bottom: 0; }
+.hero .overline { font-size: 10px; font-weight: 400; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold3); margin-bottom: 16px; }
+.hero h1 { font-family: 'Cormorant Garamond', serif; font-size: 40px; font-weight: 300; color: var(--gold2); line-height: 1.15; letter-spacing: 0.03em; margin-bottom: 8px; }
+.hero h1 em { font-style: italic; font-weight: 300; }
+.hero .subtitle { font-family: 'Cormorant Garamond', serif; font-size: 17px; font-weight: 300; font-style: italic; color: var(--txt2); margin-bottom: 18px; }
+.hero .dates-line { font-size: 11px; font-weight: 400; letter-spacing: 0.25em; text-transform: uppercase; color: var(--txt3); }
+.hero .dates-line span { color: var(--gold3); }
+
+.divider { text-align: center; margin: 0 0 2rem; color: var(--gold3); font-size: 14px; letter-spacing: 0.5em; }
+
+/* Stats */
+.stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 2.5rem; }
+.stat { background: var(--bg2); border-radius: var(--r); padding: 16px 12px; text-align: center; border: 0.5px solid var(--border); }
+.stat .num { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 300; color: var(--gold2); }
+.stat .label { font-size: 10px; font-weight: 400; color: var(--txt2); margin-top: 2px; letter-spacing: 0.12em; text-transform: uppercase; }
+
+/* Route */
+.route { display: flex; align-items: center; justify-content: center; gap: 0; margin-bottom: 2.5rem; flex-wrap: wrap; }
+.route-city { text-align: center; padding: 8px 14px; }
+.route-city .dot { width: 8px; height: 8px; border-radius: 50%; margin: 0 auto 6px; }
+.route-city .cname { font-family: 'Cormorant Garamond', serif; font-size: 15px; font-weight: 400; }
+.route-city .cdays { font-size: 10px; color: var(--txt2); letter-spacing: 0.05em; margin-top: 2px; }
+.route-arrow { color: var(--txt3); font-size: 14px; margin: 0 4px; letter-spacing: 0.1em; }
+
+/* Section title */
+.section-title { font-size: 10px; font-weight: 400; letter-spacing: 0.3em; text-transform: uppercase; color: var(--txt3); margin-bottom: 16px; padding-left: 2px; }
+
+/* Hotel cards with images */
+.hotels-summary { display: grid; grid-template-columns: 1fr; gap: 14px; margin-bottom: 2.5rem; }
+.hs-card { background: var(--bg2); border-radius: var(--r); border: 0.5px solid var(--border); overflow: hidden; }
+.hs-img { width: 100%; height: 220px; object-fit: cover; display: block; }
+.hs-img-placeholder { width: 100%; height: 220px; background: var(--bg3); display: flex; align-items: center; justify-content: center; color: var(--txt3); font-size: 12px; }
+.hs-body { padding: 16px 18px; display: flex; gap: 14px; align-items: flex-start; }
+.hs-color { width: 3px; border-radius: 2px; flex-shrink: 0; align-self: stretch; min-height: 50px; }
+.hs-text .hs-name { font-family: 'Cormorant Garamond', serif; font-size: 17px; font-weight: 400; color: var(--txt); margin-bottom: 3px; }
+.hs-text .hs-room { font-size: 12px; color: var(--gold2); font-weight: 400; }
+.hs-text .hs-dates { font-size: 10px; color: var(--txt3); margin-top: 6px; letter-spacing: 0.05em; }
+
+/* Timeline */
+.timeline { position: relative; margin-bottom: 2.5rem; }
+.tl-line { position: absolute; left: 18px; top: 0; bottom: 0; width: 1px; background: linear-gradient(to bottom, var(--hcm-c), var(--hue-c), var(--hue-c), var(--danang-c), var(--danang-c), var(--hcm-c)); opacity: 0.5; }
+.tl-day { display: flex; gap: 16px; margin-bottom: 18px; position: relative; }
+.tl-dot { width: 10px; height: 10px; border-radius: 50%; margin-top: 5px; flex-shrink: 0; z-index: 1; position: relative; left: 14px; }
+.tl-content { background: var(--bg2); border-radius: var(--r); padding: 14px 16px; flex: 1; margin-left: 10px; border: 0.5px solid var(--border2); cursor: pointer; transition: border-color 0.25s; }
+.tl-content:hover { border-color: var(--border); }
+.tl-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 3px; }
+.tl-header h3 { font-family: 'Cormorant Garamond', serif; font-size: 16px; font-weight: 400; }
+.tl-header .tag { font-size: 9px; padding: 2px 10px; border-radius: 20px; font-weight: 400; letter-spacing: 0.08em; text-transform: uppercase; }
+.tl-sub { font-size: 12px; color: var(--txt2); font-weight: 300; }
+.flight-bar { display: flex; align-items: center; gap: 8px; margin-top: 8px; padding: 8px 10px; background: rgba(201,169,110,0.04); border-radius: 8px; border: 0.5px solid var(--border); }
+.flight-icon { font-size: 12px; flex-shrink: 0; }
+.flight-info { font-size: 11px; color: var(--txt2); }
+.flight-info .fcode { color: var(--gold2); font-weight: 400; letter-spacing: 0.05em; }
+.flight-info .ftime { color: var(--txt); font-weight: 300; }
+.hotel-bar { display: flex; align-items: center; gap: 8px; margin-top: 6px; padding: 8px 10px; background: rgba(255,255,255,0.02); border-radius: 8px; border: 0.5px solid var(--border2); }
+.hotel-icon { font-size: 12px; flex-shrink: 0; }
+.hotel-info { font-size: 11px; line-height: 1.5; }
+.hotel-info .hname { color: var(--gold2); font-weight: 400; }
+.hotel-info .hroom { color: var(--txt2); font-weight: 300; }
+.tl-spots { display: none; margin-top: 10px; padding-top: 10px; border-top: 0.5px solid var(--border2); }
+.tl-spots.open { display: block; }
+.spot { display: flex; align-items: flex-start; gap: 8px; margin-bottom: 8px; }
+.spot-icon { font-size: 13px; flex-shrink: 0; width: 20px; text-align: center; margin-top: 1px; }
+.spot-info .sname { font-size: 12px; color: var(--txt); font-weight: 400; }
+.spot-info .sdesc { font-size: 11px; color: var(--txt2); line-height: 1.5; font-weight: 300; }
+.tl-toggle { font-size: 10px; color: var(--txt3); cursor: pointer; margin-top: 8px; letter-spacing: 0.1em; text-transform: uppercase; user-select: none; }
+.tl-toggle:hover { color: var(--txt2); }
+
+/* Checklist */
+.checklist { margin-bottom: 2.5rem; }
+.cl-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.cl-item { background: var(--bg2); border-radius: var(--r); padding: 10px 14px; font-size: 11px; color: var(--txt2); border: 0.5px solid var(--border2); display: flex; align-items: center; gap: 8px; font-weight: 300; }
+.cl-item .ci { flex-shrink: 0; width: 15px; height: 15px; border: 1px solid var(--txt3); border-radius: 3px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 9px; color: transparent; transition: all 0.2s; }
+.cl-item .ci.checked { border-color: var(--gold); color: var(--gold); background: rgba(201,169,110,0.08); }
+
+/* Tips */
+.tips { background: var(--bg2); border-radius: var(--r); padding: 16px; border: 0.5px solid var(--border2); margin-bottom: 1rem; }
+.tip-row { font-size: 11px; color: var(--txt2); line-height: 1.8; margin-bottom: 3px; font-weight: 300; }
+.tip-row b { color: var(--txt); font-weight: 400; }
+
+.footer { text-align: center; padding-top: 2rem; padding-bottom: 1rem; }
+.footer .mono { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 14px; color: var(--txt3); }
+
+@media (max-width: 500px) {
+  .hero h1 { font-size: 30px; }
+  .stats { grid-template-columns: repeat(2, 1fr); }
+  .cl-grid { grid-template-columns: 1fr; }
+  .hs-img { height: 180px; }
+}
+</style>
+</head>
+<body>
+<div class="dash">
+
+  <div class="hero">
+    <div class="overline">You are cordially invited to</div>
+    <h1>A Journey Through<br><em>Central Vietnam</em></h1>
+    <div class="subtitle">Ho Chi Minh City — Huế — Đà Nẵng</div>
+    <div class="dates-line">April 27 <span>—</span> May 2, 2026</div>
+  </div>
+
+  <div class="divider">···</div>
+
+  <div class="stats">
+    <div class="stat"><div class="num">6</div><div class="label">Days</div></div>
+    <div class="stat"><div class="num">3</div><div class="label">Cities</div></div>
+    <div class="stat"><div class="num">3</div><div class="label">Hotels</div></div>
+    <div class="stat"><div class="num">2</div><div class="label">Flights</div></div>
+  </div>
+
+  <div class="route">
+    <div class="route-city"><div class="dot" style="background:var(--hcm-c)"></div><div class="cname" style="color:var(--hcm-c)">Saigon</div><div class="cdays">Apr 27</div></div>
+    <div class="route-arrow">→</div>
+    <div class="route-city"><div class="dot" style="background:var(--hue-c)"></div><div class="cname" style="color:var(--hue-c)">Huế</div><div class="cdays">Apr 27–29</div></div>
+    <div class="route-arrow">→</div>
+    <div class="route-city"><div class="dot" style="background:var(--danang-c)"></div><div class="cname" style="color:var(--danang-c)">Đà Nẵng</div><div class="cdays">Apr 29–May 2</div></div>
+    <div class="route-arrow">→</div>
+    <div class="route-city"><div class="dot" style="background:var(--hcm-c)"></div><div class="cname" style="color:var(--hcm-c)">Saigon</div><div class="cdays">May 2</div></div>
+  </div>
+
+  <!-- ACCOMMODATIONS WITH IMAGES -->
+  <div class="section-title">Accommodations</div>
+  <div class="hotels-summary">
+
+    <div class="hs-card">
+
+      <div class="hs-body">
+        <div class="hs-color" style="background:var(--hue-c)"></div>
+        <div class="hs-text">
+          <div class="hs-name">Grand Royal Riverside Hue, Fusion Collection</div>
+          <div class="hs-room">Corner Deluxe King · Two balconies · Expansive city views</div>
+          <div class="hs-dates">Apr 27 – 29 (2 nights) · Huế</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hs-card">
+
+      <div class="hs-body">
+        <div class="hs-color" style="background:var(--danang-c)"></div>
+        <div class="hs-text">
+          <div class="hs-name">Angsana Lăng Cô Vietnam</div>
+          <div class="hs-room">Seaview Balcony King Grand · 53 m² · East Sea views</div>
+          <div class="hs-dates">Apr 29 – 30 (1 night) · Lăng Cô</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hs-card">
+
+      <div class="hs-body">
+        <div class="hs-color" style="background:var(--danang-c)"></div>
+        <div class="hs-text">
+          <div class="hs-name">Novotel Danang Premier Han River</div>
+          <div class="hs-room">Corner Suite · Panoramic Han River View · Bathtub · Premier Lounge</div>
+          <div class="hs-dates">Apr 30 – May 2 (2 nights) · Đà Nẵng</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ITINERARY -->
+  <div class="section-title">Itinerary</div>
+  <div class="timeline">
+    <div class="tl-line"></div>
+
+    <div class="tl-day">
+      <div class="tl-dot" style="background:var(--hcm-c)"></div>
+      <div class="tl-content" onclick="toggle(this)">
+        <div class="tl-header">
+          <h3>Day 1 — Sun, Apr 27</h3>
+          <span class="tag" style="background:rgba(201,169,110,0.12);color:var(--hcm-c)">Departure</span>
+        </div>
+        <div class="tl-sub">Saigon → Huế</div>
+        <div class="flight-bar">
+          <div class="flight-icon">✈</div>
+          <div class="flight-info"><span class="fcode">VN1370</span> · <span class="ftime">11:05 SGN → 12:25 HUI</span></div>
+        </div>
+        <div class="hotel-bar">
+          <div class="hotel-icon">🏨</div>
+          <div class="hotel-info"><span class="hname">Grand Royal Riverside Hue</span><br><span class="hroom">Corner Deluxe King</span></div>
+        </div>
+        <div class="tl-spots">
+          <div class="spot"><div class="spot-icon">🏛</div><div class="spot-info"><div class="sname">Afternoon: Imperial City</div><div class="sdesc">UNESCO World Heritage site, allow 2–3 hours to explore the citadel</div></div></div>
+          <div class="spot"><div class="spot-icon">🌆</div><div class="spot-info"><div class="sname">Evening: Perfume River promenade</div><div class="sdesc">Trường Tiền Bridge lights up in shifting colors at night</div></div></div>
+          <div class="spot"><div class="spot-icon">🍜</div><div class="spot-info"><div class="sname">Dinner: Bún bò Huế</div><div class="sdesc">Try Bà Gái — rich broth, lemongrass, thick rice noodles</div></div></div>
+        </div>
+        <div class="tl-toggle">▾ expand</div>
+      </div>
+    </div>
+
+    <div class="tl-day">
+      <div class="tl-dot" style="background:var(--hue-c)"></div>
+      <div class="tl-content" onclick="toggle(this)">
+        <div class="tl-header">
+          <h3>Day 2 — Mon, Apr 28</h3>
+          <span class="tag" style="background:rgba(212,137,122,0.12);color:var(--hue-c)">Heritage</span>
+        </div>
+        <div class="tl-sub">Full day in Huế</div>
+        <div class="hotel-bar">
+          <div class="hotel-icon">🏨</div>
+          <div class="hotel-info"><span class="hname">Grand Royal Riverside Hue</span><br><span class="hroom">Night 2</span></div>
+        </div>
+        <div class="tl-spots">
+          <div class="spot"><div class="spot-icon">⛩</div><div class="spot-info"><div class="sname">Morning: Thiên Mụ Pagoda</div><div class="sdesc">Iconic 7-storey tower on the Perfume River bank</div></div></div>
+          <div class="spot"><div class="spot-icon">🕐</div><div class="spot-info"><div class="sname">Khải Định Royal Tomb</div><div class="sdesc">East-meets-West architecture with intricate mosaic interiors</div></div></div>
+          <div class="spot"><div class="spot-icon">🌳</div><div class="spot-info"><div class="sname">Tự Đức Tomb</div><div class="sdesc">Garden-style mausoleum — poetic lakeside atmosphere</div></div></div>
+          <div class="spot"><div class="spot-icon">🍜</div><div class="spot-info"><div class="sname">Dinner: Huế tasting platter</div><div class="sdesc">Nem lụi, bánh bèo, chè — all Huế specialties in one spread</div></div></div>
+        </div>
+        <div class="tl-toggle">▾ expand</div>
+      </div>
+    </div>
+
+    <div class="tl-day">
+      <div class="tl-dot" style="background:var(--hue-c)"></div>
+      <div class="tl-content" onclick="toggle(this)">
+        <div class="tl-header">
+          <h3>Day 3 — Tue, Apr 29</h3>
+          <span class="tag" style="background:rgba(212,137,122,0.12);color:var(--hue-c)">Transit</span>
+        </div>
+        <div class="tl-sub">Huế → Lăng Cô</div>
+        <div class="hotel-bar">
+          <div class="hotel-icon">🏨</div>
+          <div class="hotel-info"><span class="hname">Angsana Lăng Cô</span><br><span class="hroom">Seaview Balcony King Grand</span></div>
+        </div>
+        <div class="tl-spots">
+          <div class="spot"><div class="spot-icon">🪷</div><div class="spot-info"><div class="sname">Morning: Incense village</div><div class="sdesc">Rainbow incense sticks — great photo spot, rent an áo dài on site</div></div></div>
+          <div class="spot"><div class="spot-icon">🚗</div><div class="spot-info"><div class="sname">Drive via Hải Vân Pass</div><div class="sdesc">One of the most scenic coastal roads in Vietnam</div></div></div>
+          <div class="spot"><div class="spot-icon">🏖</div><div class="spot-info"><div class="sname">Afternoon: resort time</div><div class="sdesc">Private beach, infinity pool, seaview balcony — unwind</div></div></div>
+        </div>
+        <div class="tl-toggle">▾ expand</div>
+      </div>
+    </div>
+
+    <div class="tl-day">
+      <div class="tl-dot" style="background:var(--danang-c)"></div>
+      <div class="tl-content" onclick="toggle(this)">
+        <div class="tl-header">
+          <h3>Day 4 — Wed, Apr 30</h3>
+          <span class="tag" style="background:rgba(107,184,201,0.12);color:var(--danang-c)">Adventure</span>
+        </div>
+        <div class="tl-sub">Lăng Cô → Đà Nẵng (Bà Nà Hills)</div>
+        <div class="hotel-bar">
+          <div class="hotel-icon">🏨</div>
+          <div class="hotel-info"><span class="hname">Novotel Danang Premier Han River</span><br><span class="hroom">Corner Suite · River View · Lounge</span></div>
+        </div>
+        <div class="tl-spots">
+          <div class="spot"><div class="spot-icon">🌄</div><div class="spot-info"><div class="sname">Bà Nà Hills Sun World</div><div class="sdesc">Golden Bridge, French Village, world-record cable car — full day</div></div></div>
+          <div class="spot"><div class="spot-icon">🌉</div><div class="spot-info"><div class="sname">Evening: Dragon Bridge at night</div><div class="sdesc">Walk from Novotel along the Han River — golden dragon illuminated</div></div></div>
+        </div>
+        <div class="tl-toggle">▾ expand</div>
+      </div>
+    </div>
+
+    <div class="tl-day">
+      <div class="tl-dot" style="background:var(--danang-c)"></div>
+      <div class="tl-content" onclick="toggle(this)">
+        <div class="tl-header">
+          <h3>Day 5 — Thu, May 1</h3>
+          <span class="tag" style="background:rgba(107,184,201,0.12);color:var(--danang-c)">Wander</span>
+        </div>
+        <div class="tl-sub">Đà Nẵng + Hội An</div>
+        <div class="hotel-bar">
+          <div class="hotel-icon">🏨</div>
+          <div class="hotel-info"><span class="hname">Novotel Danang Premier Han River</span><br><span class="hroom">Night 2</span></div>
+        </div>
+        <div class="tl-spots">
+          <div class="spot"><div class="spot-icon">🏖</div><div class="spot-info"><div class="sname">Morning: Mỹ Khê Beach</div><div class="sdesc">One of the world's six finest beaches — swim, sunbathe, relax</div></div></div>
+          <div class="spot"><div class="spot-icon">🏘</div><div class="spot-info"><div class="sname">Afternoon: Hội An Ancient Town</div><div class="sdesc">UNESCO site — golden walls, lanterns, Japanese Covered Bridge</div></div></div>
+          <div class="spot"><div class="spot-icon">🌙</div><div class="spot-info"><div class="sname">Evening: Hội An night market</div><div class="sdesc">Release lanterns on the river, cao lầu noodles, stay until dark</div></div></div>
+        </div>
+        <div class="tl-toggle">▾ expand</div>
+      </div>
+    </div>
+
+    <div class="tl-day">
+      <div class="tl-dot" style="background:var(--hcm-c)"></div>
+      <div class="tl-content" onclick="toggle(this)">
+        <div class="tl-header">
+          <h3>Day 6 — Sat, May 2</h3>
+          <span class="tag" style="background:rgba(201,169,110,0.12);color:var(--hcm-c)">Return</span>
+        </div>
+        <div class="tl-sub">Đà Nẵng → Saigon</div>
+        <div class="flight-bar">
+          <div class="flight-icon">✈</div>
+          <div class="flight-info"><span class="fcode">VN7115</span> · <span class="ftime">18:40 DAD → 20:15 SGN</span></div>
+        </div>
+        <div class="tl-spots">
+          <div class="spot"><div class="spot-icon">⛰</div><div class="spot-info"><div class="sname">Morning: Marble Mountains</div><div class="sdesc">Five limestone peaks — take the elevator up, walk down through caves</div></div></div>
+          <div class="spot"><div class="spot-icon">⛪</div><div class="spot-info"><div class="sname">Da Nang Cathedral</div><div class="sdesc">Pink Gothic church — quick photo stop</div></div></div>
+          <div class="spot"><div class="spot-icon">🍜</div><div class="spot-info"><div class="sname">Lunch: seafood by the beach</div><div class="sdesc">Fresh catches near Mỹ Khê — order by weight, grilled on the spot</div></div></div>
+          <div class="spot"><div class="spot-icon">🛍</div><div class="spot-info"><div class="sname">Afternoon: Hàn Market</div><div class="sdesc">Vietnamese coffee, cashews, souvenirs — then head to airport by 16:00</div></div></div>
+        </div>
+        <div class="tl-toggle">▾ expand</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CHECKLIST -->
+  <div class="section-title">Pre-trip checklist</div>
+  <div class="checklist">
+    <div class="cl-grid">
+      <div class="cl-item"><div class="ci checked" onclick="t(this)">✓</div>Flights booked</div>
+      <div class="cl-item"><div class="ci checked" onclick="t(this)">✓</div>Hotels confirmed</div>
+      <div class="cl-item"><div class="ci" onclick="t(this)"></div>Bà Nà Hills tickets</div>
+      <div class="cl-item"><div class="ci" onclick="t(this)"></div>Exchange VND cash</div>
+      <div class="cl-item"><div class="ci" onclick="t(this)"></div>Sunscreen & umbrella</div>
+      <div class="cl-item"><div class="ci" onclick="t(this)"></div>Comfortable walking shoes</div>
+    </div>
+  </div>
+
+  <!-- TIPS -->
+  <div class="section-title">Notes</div>
+  <div class="tips">
+    <div class="tip-row"><b>Huế → Lăng Cô:</b> Drive over Hải Vân Pass — the hidden highlight of this entire trip</div>
+    <div class="tip-row"><b>Angsana:</b> Situated between Huế and Đà Nẵng — check in and enjoy the beach all afternoon</div>
+    <div class="tip-row"><b>Novotel lounge:</b> Your Premier Lounge access includes happy hour with Han River views</div>
+    <div class="tip-row"><b>Hội An:</b> ~30 min by Grab from Đà Nẵng — stay until dark to see the lanterns light up</div>
+    <div class="tip-row"><b>Return flight:</b> VN7115 departs 18:40 — leave the city center by 16:00 at the latest</div>
+  </div>
+
+  <div class="footer">
+    <div class="mono">See you in Central Vietnam.</div>
+  </div>
+
+</div>
+
+<script>
+function t(el) {
+  el.classList.toggle('checked');
+  el.textContent = el.classList.contains('checked') ? '✓' : '';
+}
+function toggle(el) {
+  var s = el.querySelector('.tl-spots');
+  var g = el.querySelector('.tl-toggle');
+  if (!s) return;
+  var o = s.classList.contains('open');
+  s.classList.toggle('open');
+  g.textContent = o ? '▾ expand' : '▴ collapse';
+}
+</script>
+</body>
+</html>
